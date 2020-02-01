@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>08_JS原生呼吸轮播图</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .wrapper {
+      position: relative;
+      width: 900px;
+      height: 500px;
+      margin: 50px auto;
+    }
+
+    .list {
+      list-style: none;
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .list .item {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .list .item img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .list .item.active {
+      z-index: 100;
+    }
+
+    .btn {
+      /* 布局 */
+      position: absolute;
+      top: 50%;
+      z-index: 1000;
+      transform: translateY(-50%);
+      /* 样式 */
+      width: 30px;
+      height: 100px;
+      background-color: rgba(0, 0, 0, 0.4);
+      color: rgba(255, 255, 255, 0.6);
+      border: none;
+      cursor: pointer;
+      transition: all 0.4s ease;
+    }
+
+    .btn:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+      color: rgba(255, 255, 255, 1);
+    }
+
+    .btn.left {
+      left: 0;
+    }
+
+    .btn.right {
+      right: 0;
+    }
+
+    .pointer-list {
+      width: 120px;
+      height: 15px;
+      position: absolute;
+      bottom: 30px;
+      right: 35px;
+      z-index: 200;
+    }
+
+    .pointer-list .pointer {
+      width: 100%;
+      height: 100%;
+      list-style: none;
+    }
+
+    .pointer-list .pointer .dot {
+      width: 10px;
+      height: 10px;
+      float: left;
+      border-radius: 50%;
+      border: 2px solid rgb(136, 132, 132);
+      margin-right: 8px;
+      cursor: pointer;
+    }
+
+    .pointer-list .pointer .dot:hover {
+      background-color: orange;
+      transition: all 0.4s ease;
+    }
+
+    .pointer-list .pointer .dot.on {
+      background-color: orange;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper" onmouseover="mOver(this)" onmouseout="mOut(this)">
+    <ul class="list">
+      <li class="item active">
+        <img src="../images/mi-1.jpg" alt="">
+      </li>
+      <li class="item">
+        <img src="../images/mi-2.jpg" alt="">
+      </li>
+      <li class="item">
+        <img src="../images/mi-3.jpg" alt="">
+      </li>
+      <li class="item">
+        <img src="../images/mi-4.jpg" alt="">
+      </li>
+      <li class="item">
+        <img src="../images/mi-5.jpg" alt="">
+      </li>
+    </ul>
+    <button class="btn left">&lt;</button>
+    <button class="btn right">&gt;</button>
+    <div class="pointer-list">
+      <ul class="pointer">
+        <li class="dot on" onclick="dotChange(0)"></li>
+        <li class="dot" onclick="dotChange(1)"></li>
+        <li class="dot" onclick="dotChange(2)"></li>
+        <li class="dot" onclick="dotChange(3)"></li>
+        <li class="dot" onclick="dotChange(4)"></li>
+      </ul>
+    </div>
+  </div>
+
+
+  <script>
+    // 获取 DOM 元素
+    var items = document.getElementsByClassName('item');
+    var leftBtn = document.getElementsByClassName('left')[0];
+    var rightBtn = document.getElementsByClassName('right')[0];
+    var wrapper = document.getElementsByClassName('wrapper')[0];
+    var dots = document.getElementsByClassName('dot');
+    //index 表示现在第几张图片正在轮播
+    var index = 0;
+
+    // 第一步；修改 index
+    // 第二步：把 index 的效果设置到页面上
+
+    var setIndexToView = function () {
+      // 暴力方法：全部的active,on一次去掉，再根据我需要的进行赋类名
+      for (var i = 0; i < items.length; i++) {
+        items[i].classList.remove('active');
+        dots[i].classList.remove('on');
+      }
+      items[index].classList.add('active');
+      dots[index].classList.add('on');
+    }
+
+    // 下一张事件
+    var goNext = function () {
+      if (index === items.length - 1) {
+        index = 0;
+      } else {
+        index++;
+      }
+      // console.log(index);
+      setIndexToView();
+    }
+
+    // 上一张事件
+    var goPrev = function () {
+      if (index === 0) {
+        index = items.length - 1;
+      } else {
+        index--;
+      }
+      // console.log(index);
+      setIndexToView();
+    }
+
+    // 小圆点跳转事件
+    var dotChange = function (dotIndex) {
+      console.log(dotIndex);
+      index = dotIndex;
+      setIndexToView();
+    }
+
+
+    // 左侧按钮绑定事件
+    leftBtn.addEventListener('click', function () {
+      goPrev();
+    })
+
+    // 右侧按钮绑定事件
+    rightBtn.addEventListener('click', function () {
+      goNext();
+    })
+
+
+    // 自动轮播事件
+    var timer = null;
+    var autoChange = function () {
+      timer = setInterval(() => {
+        goNext();
+      }, 3000);
+    }
+    autoChange();
+
+    // 鼠标移入或移出，停止或继续执行自动轮播事件
+    function mOver(obj) {
+      // console.log('清除计时器');
+      clearInterval(timer);
+    }
+    function mOut(obj) {
+      // console.log('执行自动轮播...');
+      autoChange();
+    }
+
+
+  </script>
+
+
+</body>
+
+</html>

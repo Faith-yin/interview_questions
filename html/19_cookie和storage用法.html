@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>19 cookie storage</title>
+</head>
+<body>
+
+  <script>
+    /**
+    ----------------cookie 的增删改查---------------------------------
+    */
+    // 设置cookie
+    function setCookie(name, value, days) { //封装一个设置cookie的函数
+      var oDate = new Date();
+      oDate.setDate(oDate.getDate() + days); //days为保存时间长度
+      document.cookie = name+"="+value+";expire="+oDate;
+    }
+    // setCookie("birthday", "19960913", "3"); //保存数据，3天后过期
+  
+    // 获取cookie
+    function getCookie(name) {
+      var arr = document.cookie.split(";");
+      for(var i=0;i<arr.length;i++) {
+        var arr2 = arr[i].split("=");
+        if(arr2[0] == name) {
+          return arr2[1]; //找到所需要的的信息返回出来
+        }
+      }
+      return ""; //找不到返回空字符串
+    }
+    // getCookie("birthday");
+
+    // 删除cookie
+    function removeCookie(name) {
+      // 将日期设置为过去
+      setCookie(name, '', -1); //-1表示昨天过期，系统自动删除
+    }
+    removeCookie("birthday");
+
+    // 修改cookie
+    // document.cookie = "birthday=20191104";
+
+
+
+
+
+    /**
+    ----------------sessionStorage 的增删改查-------------------------------
+    */
+    // // 设置sessionStorage或者localStorage
+    // window.sessionStorage.setItem("strogeIndexcodes", "1234567");
+    
+    // // 获取sessionStorage
+    // let contrastLists = window.sessionStorage.getItem("strogeIndexcodes");
+    
+    // // 删除sessionStorage
+    // let contrastLists = window.sessionStorage.removeItem("strogeIndexcodes");
+    
+    // //清空localStorage中所有信息
+    // localStorage.clear();​
+
+
+
+
+  </script>
+
+  
+</body>
+</html>

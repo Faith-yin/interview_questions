@@ -1,0 +1,31 @@
+<!-- 
+  判断一个变量是否是数组的两种方法：
+    1、instanceof
+    2、Array.isArray
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>19</title>
+</head>
+
+<body>
+  <script>
+    var arr = [1, 2, 3, 4, 5]
+
+    var judgeArray = arr instanceof Array;
+    console.log(judgeArray);
+
+    var judgeArray1 = Array.isArray(arr);
+    console.log(judgeArray1);
+
+  </script>
+
+</body>
+
+</html>

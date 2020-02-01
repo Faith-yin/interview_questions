@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ES6</title>
+</head>
+<body>
+  <script>
+    var add = function(a,b) {
+      return a + b;
+    }
+
+    // 箭头函数
+    var add2 = (a,b) => {
+      return a + b;
+    }
+
+
+    var p = function(a) {
+      return a * a;
+    }
+
+    // 箭头函数：一个参数时可以省略小括号 ()
+    var p = a => {
+      return a * a;
+    }
+
+    // // 箭头函数：返回语句只有一条时可以省略大括号 {}
+    var p = a => a * a
+
+
+    // json 对象深拷贝
+    let json = { a: "aaa" }
+    let newJson = JSON.parse(JSON.stringify(json))
+    newJson.a = "bbb"
+    // console.log(newJson);
+    // console.log(json);
+
+
+
+
+    
+  </script>
+  
+</body>
+</html>

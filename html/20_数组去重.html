@@ -1,0 +1,27 @@
+<!-- 
+  数组去重
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>20 </title>
+</head>
+<body>
+
+  <script>
+    var intersection = (a, b) => {
+      var s = new Set(b);
+      var result = a.filter(x => s.has(x));
+      console.log(result);
+      return result;
+    };
+    intersection([2, 1, 3], [4, 3, 2]);
+  
+  </script>
+  
+</body>
+</html>

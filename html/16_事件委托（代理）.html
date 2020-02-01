@@ -1,0 +1,38 @@
+<!-- 事件委托：也叫事件代理，是事件捕获和事件冒泡的一种运用。
+  优点：
+  (1)减少内存消耗。不用给每一个 li 都绑定一个函数。绑定到ul上面，执行事件的时候去匹配判断目标元素。
+  (2)动态绑定事件。增加或者去除列表项元素，那么在每一次改变的时候都需要重新给新增的元素绑定事件，给即将删去的元素解绑事件；
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>22</title>
+</head>
+
+<body>
+  <div id="test">
+    <li>这是第 1 个li</li>
+    <li>这是第 2 个li</li>
+    <li>这是第 3 个li</li>
+    <li>这是第 4 个li</li>
+    <li>这是第 5 个li</li>
+    <li>这是第 6 个li</li>
+  </div>
+
+  <script>
+    const test = document.querySelector("#test");
+    test.addEventListener('click', function (e) {
+      const event = e || window.event; // 处理兼容问题
+      const target = event.target || event.srcElement;
+      console.log(target.innerText);
+    })
+
+  </script>
+</body>
+
+</html>

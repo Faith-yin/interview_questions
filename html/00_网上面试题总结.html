@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>00 面试题</title>
+</head>
+
+<body>
+  <script>
+    // test 01:
+    class A {
+      constructor() {
+        this.name = '专注前端'
+      }
+    }
+
+    A = class B { // A 是一个 function，所以可以直接 new 对象，对象会拥有 B 的全部属性
+      constructor() {
+        this.name = '前端专栏'
+      }
+    }
+
+    const a = new A()
+    // console.log(a); //结果：B{name: "前端专栏"}
+
+
+    // test 02: 这里return了一个空值，所以为undefined
+    function nums(a, b) {
+      if
+      (a > b)
+      console.log('a');
+      else
+      console.log('b');
+      return
+      a + b
+    }
+    // console.log(nums(4, 2)); //结果：a undefined
+    // console.log(nums(1, 2)); //结果：b undefined
+
+
+    // test 03:
+    // ! 的优先级大于 ==，最后 true===string，所以为 false
+    var aa = !!typeof '前端专栏' === 'string'
+    // console.log(aa); //结果：false
+
+
+    // test 04:
+    // 我们知道，对象的键都是以字符串形式存在（Symbol除外）
+    // 例如 let a = {}; a[1] = 1; a["1"] = 2最终变量 a = {"1": 2}
+    // 而如果传入对象时，会将调用 .toString() 方法将其转换成字符串 "[object Object]"，所以题目中两次赋值都是相当于 a["[object Object]"]，当对同一个键赋值，后面的覆盖前面的。
+    const x = {}
+    const y = { key: 'y' }
+    const z = { key: 'z' }
+
+    x[y] = 123
+    x[z] = 456
+
+    // console.log(x[y]); //结果：输出number 456
+
+
+    // test 05: 扩展运算符 对象中的扩展运算符(...)用于取出参数对象中的所有可遍历属性，拷贝到当前对象之中
+    //  (如果目标对象与源对象有同名属性，或多个源对象有同名属性，则后面的属性会覆盖前面的属性)
+    function getItems(start, ...end) {
+      console.log([start, ...end]);
+    }
+    // getItems(["11", "22"], "33"); //结果：输出string字符串，包含一个array和一个字符
+
+    
+
+
+
+
+  </script>
+
+</body>
+
+</html>

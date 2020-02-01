@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>21 分页展示数据</title>
+  <link rel="stylesheet" href="../lib/bootstrap.min.css">
+  <script src="../lib/axios.min.js"></script>
+  <script src="../lib/jquery-3.4.1.js"></script>
+  <style>
+    .wrapper {
+      width: 1000px;
+      margin: 50px auto;
+    }
+    .btn-wrapper {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <h2>
+      当前页码：
+      <span id="spanPage"></span>
+    </h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Uid</th>
+          <th>Id</th>
+          <th>Title</th>
+          <th>Content</th>
+          <th>Author</th>
+          <th>Time</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <div class="btn-wrapper">
+      <button class="btn btn-default" onclick="prevPage()">上一页</button>
+      <button class="btn btn-default" id="btn1" onclick="page(1)">1</button>
+      <button class="btn btn-default" id="btn2" onclick="page(2)">2</button>
+      <button class="btn btn-default" id="btn3" onclick="page(3)">3</button>
+      <button class="btn btn-default" id="btn4" onclick="page(4)">4</button>
+      <button class="btn btn-default" id="btn5" onclick="page(5)">5</button>
+      <button class="btn btn-default" onclick="nextPage()">下一页</button>
+    </div>
+  </div>
+
+
+  <script>
+    $(() => {
+      loadData();
+    })
+
+    var currentPage = 1; // 当前页码
+    var data; // 后台所有数据
+
+    function loadData() { // 从后台加载数据
+      axios.get("http://localhost:3000/news")
+      .then(response => {
+        console.log(111);
+        data = response.data;
+        appendData((currentPage-1)*5, currentPage*5);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+    }
+
+    function appendData(startIndex, endIndex) { // 将数据渲染至页面
+      let pageList = data.slice(startIndex, endIndex);
+      $('#tbody').empty(); // 先清空当前页内容
+      for(let i = 0; i < pageList.length; i ++) {
+        $('#tbody').append(
+          `<tr>
+            <td>${i+1}</td>
+            <td>${pageList[i].id}</td>
+            <td>${pageList[i].title}</td>
+            <td>${pageList[i].content.slice(0, 5)}</td>
+            <td>${pageList[i].author}</td>
+            <td>${pageList[i].time}</td>
+          </tr>`
+        )
+      }
+      drawPage();
+    }
+
+    function prevPage() { // 上一页
+      if(currentPage > 1) {
+        currentPage --;
+        appendData((currentPage-1)*5, currentPage*5);
+        drawPage();
+        console.log("当前页码：" + currentPage);
+      }else {
+        alert("当前已是第一页！");
+      }
+    }
+
+    function nextPage() { // 下一页
+      if(currentPage < Math.ceil(data.length/5)) {
+        currentPage ++;
+        appendData((currentPage-1)*5, currentPage*5);
+        drawPage();
+        console.log("当前页码：" + currentPage);
+      }else {
+        alert("当前已是最后一页！");
+      }
+    }
+
+    function drawPage() { // 渲染页面页码显示，页码按钮样式
+      $('#spanPage').text(currentPage);
+      for(let i = 1; i < 6; i ++) {
+        $('#btn' + i).removeAttr("style");
+      }
+      $('#btn'+ currentPage).css("background-color", "#98bf21");
+    }
+
+    function page(gotoPage) { // 跳转页按钮
+      currentPage = gotoPage;
+      drawPage();
+      appendData((currentPage-1)*5, currentPage*5);
+    }
+
+
+
+  </script>
+
+
+</body>
+
+</html>

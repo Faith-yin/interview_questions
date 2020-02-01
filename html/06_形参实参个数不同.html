@@ -1,0 +1,51 @@
+<!-- 
+
+  arguments.length 表示的是实际上向函数传入了多少个参数,
+这个数字可以比形参数量大,也可以比形参数量小(形参数量的值
+可以通过Function.length获取到。
+
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>12</title>
+</head>
+
+<body>
+
+
+  <script>
+    // add(10, 10);==> 20   arguments.length: 2
+    // add(10)(10);==> 20   arguments.length: 1
+
+    function add(num) {
+
+      console.log(add.length); //查看此函数的形参个数
+
+      if (arguments.length == 1) {
+        return function (num1) {
+          return num + num1;
+        }
+      } else {
+
+        var sum = 0;
+        for (var i = 0; i < arguments.length; i++) {
+          sum += arguments[i];
+        }
+        return sum;
+      }
+    }
+
+    add(10)(20);
+    add(100, 200);
+
+
+  </script>
+
+</body>
+
+</html>

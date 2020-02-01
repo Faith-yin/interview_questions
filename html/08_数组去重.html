@@ -1,0 +1,89 @@
+<!-- 
+  数组去重三个方法：
+
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>14</title>
+</head>
+
+<body>
+  <script>
+    var arr = [1,1,2,3,4,5,5,5];
+
+
+    // 方法一：
+    Array.prototype.unique = function () {
+
+      var arr = []; //新建一个临时数组
+
+      for (var i = 0; i < this.length; i++) { //遍历当前数组
+
+        if (arr.indexOf(this[i]) == -1) { //当前数组的第i个值在新数组中找不到，则添加到新数组中去
+
+          arr.push(this[i]);
+
+        }
+
+      }
+
+      return arr;
+
+    };
+
+    console.log(arr.unique());
+
+
+    // 方法二：
+    Array.prototype.unique = function () {
+
+      var arr = [];//新建一个临时数组
+
+      var obj = {};//新建一个新对象，根据对象属性的唯一性，来判断
+
+      for (var i = 0; i < this.length; i++) {//遍历当前数组,将当前数组的值作为对象的属性，判断是否在对象中存在。
+
+        if (obj[this[i]] == undefined) {
+
+          obj[this[i]] = 1;
+
+          arr.push(this[i]);
+
+        }
+
+      }
+
+      return arr;
+
+    };
+
+    // 方法三：
+    Array.prototype.unique = function () {
+
+      var arr = [];//新建一个临时数组
+
+      for (var i = 0; i < this.length; i++) {  //遍历当前数组
+
+        if (this.indexOf(this[i] == i)) {//判断当前数组第i个值是否是第i个数，如果不是，代表数组前面已有相同的值。
+
+          arr.push(this[i]);
+
+        }
+
+      }
+
+      return arr;
+
+    };
+
+  </script>
+
+</body>
+
+</html>

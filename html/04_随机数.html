@@ -1,0 +1,40 @@
+<!-- 
+  写一个函数getRandomNumber(startNum,endNum),
+    取出startNum到endNum之间的任意随机数 
+-->
+
+
+<!DOCTYPE html>
+<html lang="ah_CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>10</title>
+</head>
+
+<body>
+
+
+
+  <script>
+    function getRandomNumber(startNum, endNum) {
+      var endRand = endNum - startNum + 1;
+      var randNum = Math.random();
+      console.log("endRand: ", endRand);
+      console.log("randNum: ", randNum);
+
+      randNum = Math.floor(randNum * endRand);
+      console.log("randNum: ", randNum);
+
+      console.log("结果：", randNum + startNum);
+    }
+
+    getRandomNumber(2, 5);
+
+  </script>
+
+</body>
+
+</html>

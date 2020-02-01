@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>07 </title>
+</head>
+
+<body>
+
+
+  <script>
+    // JSON.stringify() 方法是将 json 数据转换成字符串
+    var data = [
+      {
+        name: "John",
+        age: 20,
+        id: 1
+      },
+      {
+        name: "Tom",
+        age: 22,
+        id: 2
+      }
+    ]
+
+    var dataToString = JSON.stringify(data, null, 5)
+    console.log(dataToString);
+
+
+
+    // JSON.parse() 方法是将 json 字符串换成 json 对象
+    var arr = `{"array":[` +
+      `{"name": "jerry","age": 1}` + 
+    `]}`;
+
+    // var arr = `{"name":"tomry"}`
+
+    console.log("arr: ",arr);
+
+    var arrToObject = JSON.parse(arr);
+    console.log(arrToObject);
+
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>

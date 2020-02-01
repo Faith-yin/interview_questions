@@ -1,0 +1,67 @@
+<!-- 
+  用 ES6 的 Promise 解决回调地狱问题
+-->
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>17 </title>
+</head>
+<body>
+  <script>
+
+    // 回调地狱问题：
+    // let showLight = light => {
+    //   console.log("Now is " + light + " " + new Date());
+    // }
+
+    // let light = () => {
+    //   showLight("red");
+    //   setTimeout(() => {
+    //     showLight("yellow");
+    //     setTimeout(() => {
+    //       showLight("green");
+    //       setTimeout(() => {
+    //         light();
+    //       },3000)
+    //     },2000)
+    //   }, 1000)
+    // }
+
+    // light();
+
+
+    // ES6 Promise 解决 回调地狱问题：使用Promise将异步行为封装起来，待异步行为完成后resolve
+    let showLight = light => {
+      console.log(`Now is ${light} ${new Date()}`);
+    }
+
+    let scheduling = (light, delay) => {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          showLight(light);
+          resolve();
+        },delay)
+      })
+    }
+
+    let turnRed = () => scheduling("red", 1000);
+    let turnYellow = () => scheduling("yellow", 2000);
+    let turnGreen = () => scheduling("green", 3000);
+
+    let start = () => {
+      turnRed()
+      .then(turnYellow)
+      .then(turnGreen)
+      .then(start)
+    }
+
+    start();
+
+
+  </script>
+
+</body>
+</html>

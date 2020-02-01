@@ -1,0 +1,49 @@
+<!-- 
+  如何处理HTML5新标签的浏览器兼容问题？
+  两步。。
+ -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>16</title>
+
+  <!-- 
+    1、将以下代码复制到head部分，记住一定要是head部分
+    （因为IE必须在元素解析前知道这个元素，所以这个js文件不能在其他位置调用，否则失效）
+  -->
+
+  <!-- [if it IE 9] -->
+  <script type="text/javascript" src="js/html5shiv.js"></script>
+  <!-- [endif] -->
+
+
+  <!-- 
+    2、最后在css里面加上这段：主要是让这些html5标签成块状，像div那样。
+   -->
+  <style>
+    article,
+    aside,
+    dialog,
+    footer,
+    header,
+    section,
+    footer,
+    nav,
+    figure,
+    menu {
+      display: block
+    }
+  </style>
+</head>
+
+<body>
+
+</body>
+
+</html>
